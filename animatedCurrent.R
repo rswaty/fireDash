@@ -28,3 +28,5 @@ animateCurr <-
   transition_reveal(Year)
 
 animateCurr
+
+anim_save("animated.gif", animateCurr)
