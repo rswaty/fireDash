@@ -55,8 +55,8 @@ mytext <- paste(
 
 #################
 tryAll <- leaflet(states_fireAll4, options = leafletOptions(zoomSnap = 0.25)) %>% 
-  # addTiles()  %>%
-  setView( lat=35.2389948, lng=-96.3130186 , zoom=3.5) %>%
+  setView( lat=35.2389948, lng=-96.3130186 , zoom=4.0) %>%
+  addTiles() %>%
   addPolygons(fillColor = ~palAll(states_fireAll4$percentAll),
               stroke=TRUE,
               weight = 1,
@@ -125,4 +125,7 @@ addLayersControl(baseGroups = c("All Fire Types (ranges from 0-25%)", "Mixed fir
 
 
 tryAll %>% hideGroup(states_fireAll4$percentSurface)
+
+library(htmlwidgets)
+saveWidget(tryAll, file="choroMap.html")
 
