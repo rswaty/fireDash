@@ -3,6 +3,8 @@ title: "Fire then and now: a LANDFIRE powered assessment"
 output: 
   flexdashboard::flex_dashboard:
     vertical_layout: scroll
+    
+self_contained: true
 ---
     
     ```{r global, include=FALSE}
