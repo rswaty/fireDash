@@ -54,7 +54,7 @@ mytext <- paste(
 
 
 #################
-tryAll <- leaflet(states_fireAll4, options = leafletOptions(zoomSnap = 0.25)) %>% 
+tryAll <- leaflet(states_fireAll4, options = leafletOptions(zoomSnap = 0.25, zoomControl = FALSE)) %>% 
   setView( lat=35.2389948, lng=-96.3130186 , zoom=4.0) %>%
   addTiles() %>%
   addPolygons(fillColor = ~palAll(states_fireAll4$percentAll),
@@ -114,10 +114,10 @@ tryAll <- leaflet(states_fireAll4, options = leafletOptions(zoomSnap = 0.25)) %>
 
 addLayersControl(baseGroups = c("All Fire Types (ranges from 0-25%)", "Mixed fire type (ranges from 0-3%)", "Replacement fire type (ranges from 0-15%)", "Surface fire type (ranges from 0-18%)"),
                  options = layersControlOptions(collapsed = FALSE),
-                 position = "bottomleft")%>%
+                 position = "bottomright")%>%
   htmlwidgets::onRender("
         function() {
-            $('.leaflet-control-layers-overlays').prepend('<label style=\"text-align:center\">Please select fire type, noting ranges which are specific for each one</label>');
+            $('.leaflet-control-layers-overlays').prepend('<label style=\"text-align:center\">Please select fire type, noting ranges are specific for each one</label>');
         }
     ")
 
@@ -126,6 +126,9 @@ addLayersControl(baseGroups = c("All Fire Types (ranges from 0-25%)", "Mixed fir
 
 tryAll %>% hideGroup(states_fireAll4$percentSurface)
 
+library(widgetframe)
 library(htmlwidgets)
+htmlwidgets::saveWidget(frameableWidget(tryAll),'choroMapFW.html')
+
 saveWidget(tryAll, file="choroMap.html")
 

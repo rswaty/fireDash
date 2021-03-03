@@ -19,40 +19,6 @@ library(sf)
 library(rgdal)
 library(htmlwidgets)
 
-# Downloading the shapefiles for states at the lowest resolution
-states <- states(cb=T)
-
-states <- st_transform(states, CRS("+proj=longlat +datum=WGS84 +ellps=WGS84 +towgs84=0,0,0"))
-
-# get da csvs of historical fire percent for states
-all <- read_csv("data/histAllStatePercent.csv")
-mixed <- read_csv("data/histMixedStatePercent.csv")
-replacement <- read_csv("data/histReplacementStatePercent.csv")
-surface <- read_csv("data/histSurfaceStatePercent.csv")
-
-all$percentAll <- round(all$percentAll, digits = 0)
-mixed$percentMixed <- round(mixed$percentMixed, digits = 0)
-replacement$percentReplacement <- round(replacement$percentReplacement, digits = 0)
-surface$percentSurface <- round(surface$percentSurface, digits = 0)
-
-states_fire1 <- geo_join(states, all, "NAME", "state", how = "inner")
-states_fire2 <- geo_join(states_fire1, mixed, "NAME", "state")
-states_fire3 <- geo_join(states_fire2, surface, "NAME", "state")
-states_fireAll4 <- geo_join(states_fire3, replacement, "NAME", "state")
-
-palAll <- colorNumeric("Reds", domain=states_fireAll4$percentAll)
-palMixed <- colorNumeric("Reds", domain=states_fireAll4$percentMixed)
-palReplacement <- colorNumeric("Reds", domain=states_fireAll4$percentReplacement)
-palSurface <- colorNumeric("Reds", domain=states_fireAll4$percentSurface)
-
-mytext <- paste(
-  "State: ", states_fireAll4$NAME,"<br/>", 
-  "Percent for all fires: ", (states_fireAll4$percentAll), "<br/>", 
-  "Percent for mixed fires: ", (states_fireAll4$percentMixed), "<br/>", 
-  "Percent for replacement fires: ", (states_fireAll4$percentReplacement), "<br/>", 
-  "Percent for surface fires: ", (states_fireAll4$percentSurface), "<br/>", 
-  sep="") %>%
-  lapply(htmltools::HTML)
 
 # load data in 'global' chunk so it can be shared by all users of the dashboard
 # Chord Diagram
@@ -78,81 +44,39 @@ histFireGVchordMatrix2 <- histFireGVchordMatrix[-c(8:10),]
 Overview
 =====================================
 
-Column {data-width=1000}
+Column {data-width=800}
 -----------------------------------------------------------------------
 
-There was lots of fire title
 
-```{r, fig.width=12, fig.height=8}
-tryAll <- leaflet(states_fireAll4, options = leafletOptions(zoomSnap = 0.25)) %>% 
-  # addTiles()  %>%
-  setView( lat=35.2389948, lng=-96.3130186 , zoom=4.0) %>%
-  addTiles() %>%
-  addPolygons(fillColor = ~palAll(states_fireAll4$percentAll),
-              stroke=TRUE,
-              weight = 1,
-              color = "grey",
-              opacity = 5,
-              fillOpacity = .9,
-              group = "All fire types  combined (ranges from 0-25%)",
-              label = mytext,
-              labelOptions = 
-                labelOptions( 
-                  style = list("font-weight" = "normal", padding = "3px 8px"), 
-                  textsize = "13px", 
-                  direction = "auto"))%>%
-  addPolygons(fillColor = ~palMixed(states_fireAll4$percentMixed),
-              stroke=TRUE,
-              weight = 1,
-              color = "grey",
-              opacity = 5,
-              fillOpacity = .9,
-              group = "Mixed fire type (ranges from 0-3%)")%>%
-  addPolygons(fillColor = ~palReplacement(states_fireAll4$percentReplacement),
-              stroke=TRUE,
-              weight = 1,
-              color = "grey",
-              opacity = 5,
-              fillOpacity = .9,
-              group = "Replacement fire type (ranges from 0-15%)")%>%
-  addPolygons(fillColor = ~palSurface(states_fireAll4$percentSurface),
-              stroke=TRUE,
-              weight = 1,
-              color = "grey",
-              opacity = 5,
-              fillOpacity = .9,
-              group = "Surface fire type (ranges from 0-18%)") %>%
-addLayersControl(baseGroups = c("All Fire Types (ranges from 0-25%)", "Mixed fire type (ranges from 0-3%)", "Replacement fire type (ranges from 0-15%)", "Surface fire type (ranges from 0-18%)"),
-                 options = layersControlOptions(collapsed = FALSE),
-                 position = "bottomleft")%>%
-  htmlwidgets::onRender("
-        function() {
-            $('.leaflet-control-layers-overlays').prepend('<label style=\"text-align:center\">Please select fire type, noting ranges which are specific for each one</label>');
-        }
-    ")
-#renderPlot({
-  tryAll %>% hideGroup(states_fireAll4$percentSurface)
-#})
+
+```{r, fig.height=4}
+# insert choroMap.html URL
+htmltools::tags$iframe(title = "My embedded document", src = "choroMapFW.html", frameborder = "1", width = "100%", height="700", vspace="30")
+
 ```
 
 Column {.sidebar}
 -----------------------------------------------------------------------
 
-### Explain here with minimal text
+### There was ~172,000,000 acres of fire every year before European Colonization
+
+Blah Blah
 
 ```{r}
 # test
 ```
 
-Fire types
+
+
+Fire and Ecosystems
 =====================================
 
-Column {data-width=1000}
+Column {data-width=900}
 -----------------------------------------------------------------------
 
 Which ecosystems had the most fire? And what kind?
 
-```{r, fig.width=10, fig.height=7}
+```{r, fig.width=11, fig.height=7.5}
 # Chord Diagram
 #make a custom color pallet
 groupColors <-c( "#e6e0be", # grassland OK
@@ -180,10 +104,11 @@ chord<-chorddiag(data = histFireGVchordMatrix2,
 chord
 ```
 
-Column 
------------------------------------------------------------------------
 
-### Minimal explanatory text
+Column {data-width=300}
+-----------------------------------------------------------------------
+blah
+
 
 ```{r}
 
