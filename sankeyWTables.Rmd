@@ -1,0 +1,76 @@
+---
+title: "Sankey with Tables"
+author: "The Nature Conservancy's LANDFIRE team"
+date: "3/26/2021"
+output:
+  html_document:
+    theme: yeti
+---
+
+
+## Sankey Diagram explores conversion from amounts of past ecosystems to present ecosystems
+
+```{r sankey, echo=FALSE, message=FALSE, warning=FALSE, fig.align='left', fig.width=10}
+
+library(networkD3)
+library(dplyr)
+library(readr)
+library(dplyr)
+library(DT)
+
+# bump left labels to white
+# stretched
+# 
+
+
+data <- read_csv("data/bps2evt2.csv")
+
+nodes <- data.frame(
+  name=c(as.character(data$source), 
+         as.character(data$target)) %>% unique())
+
+
+data$IDsource <- match(data$source, nodes$name)-1 
+data$IDtarget <- match(data$target, nodes$name)-1
+
+# Make the Network
+snky2 <- sankeyNetwork(Links = data, 
+                       Nodes = nodes,
+                       Source = "IDsource", 
+                       Target = "IDtarget",
+                       Value = "value", 
+                       NodeID = "name", 
+                       width = 1200,
+                       height = 800, 
+                       fontSize=22,
+                       iterations = 0,
+                       sinksRight=FALSE,
+                       margin = 1)
+
+
+
+
+snky2
+```
+
+<br>
+<br>
+
+## Table of Biophysical Settings to Grouped Types
+
+<br>
+
+```{r bpsTable, echo=FALSE, message=FALSE, warning=FALSE}
+dataBpS <- read_csv("data/bpsPhys.csv")
+datatable(dataBpS)
+```
+
+
+## Table of Existing Vegetation Types to Grouped Types
+
+```{r evtTable, echo=FALSE, message=FALSE, warning=FALSE}
+dataBpS <- read_csv("data/evtPhys.csv")
+datatable(dataBpS)
+```
+
+

@@ -20,6 +20,8 @@ historicalCurrentFire <- merge(currentFireAcresStates, histAreaBurnedbyState, by
 historicalCurrentFire <- historicalCurrentFire %>%
   mutate(difference = historic_acres_burned - currentAverageAcres)
 
+write.csv(historicalCurrentFire, file = "histCurStates.csv")
+
 
 historicalCurrentFire$state <- factor(historicalCurrentFire$state , levels = rev(unique(historicalCurrentFire$state)))
 
