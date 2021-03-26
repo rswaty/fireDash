@@ -2,13 +2,12 @@
 title: "Sankey with Tables"
 author: "The Nature Conservancy's LANDFIRE team"
 date: "3/26/2021"
-output:
-  html_document:
-    theme: yeti
+output: html_document
+
 ---
 
 
-## Sankey Diagram explores conversion from amounts of past ecosystems to present ecosystems
+## Exploring ecosystem conversion over time
 
 ```{r sankey, echo=FALSE, message=FALSE, warning=FALSE, fig.align='left', fig.width=10}
 
@@ -41,7 +40,7 @@ snky2 <- sankeyNetwork(Links = data,
                        Value = "value", 
                        NodeID = "name", 
                        width = 1200,
-                       height = 800, 
+                       height = 600, 
                        fontSize=22,
                        iterations = 0,
                        sinksRight=FALSE,
@@ -56,21 +55,30 @@ snky2
 <br>
 <br>
 
-## Table of Biophysical Settings to Grouped Types
+## Ecosystem groups (past) & ecological communities
 
 <br>
 
 ```{r bpsTable, echo=FALSE, message=FALSE, warning=FALSE}
 dataBpS <- read_csv("data/bpsPhys.csv")
-datatable(dataBpS)
+datatable(dataBpS, colnames = c('Ecosystem groups (past)', 'Ecological communities', 'Acres'))
 ```
 
+<br>
 
-## Table of Existing Vegetation Types to Grouped Types
+Get descriptions of ecological communities [here](http://landfirereview.org/test/search.php)
+
+
+## Ecosystem groups (present) & ecological communities
+
+<br>
 
 ```{r evtTable, echo=FALSE, message=FALSE, warning=FALSE}
 dataBpS <- read_csv("data/evtPhys.csv")
-datatable(dataBpS)
+datatable(dataBpS, colnames = c('Ecosystem groups (present)', 'Ecological communities', 'Acres'))
 ```
 
+<br>
+
+Get descriptions of ecological communities [here](http://landfirereview.org/test/search.php)
 
