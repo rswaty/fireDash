@@ -1,7 +1,7 @@
 ---
-title: "Sankey with Tables"
-author: "The Nature Conservancy's LANDFIRE team"
-date: "3/26/2021"
+title: ""
+author: ""
+date: ""
 output: html_document
 
 ---
