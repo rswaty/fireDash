@@ -41,15 +41,49 @@ histFireGVchordMatrix = subset(histFireGVchordMatrix, select = -c(1:7))
 histFireGVchordMatrix2 <- histFireGVchordMatrix[-c(8:10),]
 ```
 
-Fire in the lower 48 states
+One burning issue.
 ========================================================
 
-## Fire amounts and severity by state
+## blah
 
+<font size="6"> Wildfire is a growing issue. </font>
+
+
+
+```{r animatedPlotly, fig.height=6}
+# insert choroMap.html URL
+htmltools::tags$iframe(title = "My embedded document", src = "plotly.html", frameborder = "1", width = "100%", height="600", vspace="30")
+
+```
+<br>
+
+
+
+Column {.sidebar}
+-----------------------------------------------------------------------
+
+### <b><font  size="4em" color="#000000">Annual acres burned has grown from ~1 M acres in 1984 to over 10M acres in 2020. <br> <br> Click the play button at the lower right to see the trend.</font></b>
+
+<br>
+This is not news for anyone in the fire business.  What is not captured here are the lives impacted, structures destroyed, habitats fundamentally altered (often beyond what fires would naturally do because of unnatural fuels buildup) and resources used in suppression.
+
+**Question:** how do you think this compares to what would have burned in the years just prior to European colonization?
+
+Data for the lower 48 United States from the Monitoring Trends in Burn Severity program (https://www.mtbs.gov/).  
+
+
+
+
+Historical fire by state
+========================================================
+## blah
+
+
+<font size="6"> Compare historical patterns below to where you see most fires occurring today. </font>
 
 ```{r choropleth, fig.height=7}
 # insert choroMap.html URL
-htmltools::tags$iframe(title = "My embedded document", src = "choroMapFW.html", frameborder = "1", width = "100%", height="700", vspace="30")
+htmltools::tags$iframe(title = "My embedded document", src = "choroMapSimple.html", frameborder = "1", width = "90%", height="700", vspace="30")
 
 ```
 
@@ -61,64 +95,26 @@ Column {.sidebar}
 
 Prior to European colonization most of the fires were located in the central and eastern regions, and were most common in the grassland ecosystems, where replacement fires could have happened every 1-3 years.  The pine, oak and hickory forests of the east (especially the longleaf pine ecosystems of the southeast) would typically have surface fires every 5-10 years, with replacement fires being rare. 
 
-Out west, where we see the most fires today, the forested ecosystems would have had fairly frequent fires. Those states had less fire overall due to the heterogeneity of ecosystems: that is, most of those states had a mix of fire-dependent and fire-independent ecosystems. 
+**Hover over a state to get historical percentage burned annually by fire type.**
 
-Please note that ranges shift based on the fire type selected.
-
-// Celeste here: fixed a bit of grammar/ spellcheck in the paragraphs above. My main thoughts are: should we define replacement fire? The second paragraph also seems contradictory because it says there was frequent fire, then says it had less fire. Compared to the present? Could make that more clear. Also might change 'could have happened' in the first sentence to something more concrete, even just 'would have happened.' 
-// Celeste: Maybe move the 'please note that the ranges shift' over on top of the map key, if possible? People will likely not read it buried at the end here.
+* Surface fire = 0-25% top kill
+* Mixed fire = 26-75% top kill
+* Replacement fire = 76-100% top kill
 
 Fire and Ecosystems
 =========================================================
+## blah
 
-### <b><font  size="4em" color="#000000">Where the ecosystems were</font></b> 
+<font size="6"> Most fire occurred in grasslands historically. </font>
 
-
-```{r groupveg map, fig.height=7, fig.width=10}
-knitr::include_graphics("groupVegLegend.png") 
-```
-// Celeste: maybe set the map view more zoomed in. also, the key explanation could be moved to the top.
-
-### <b><font  size="4em" color="#000000">How much fire was in each type?</font></b>  
-    
-```{r chord, fig.height=7.5, fig.width=11}
-
-
-# Chord Diagram
-#make a custom color pallet
-groupColors <-c( "#e6e0be", # grassland OK
-                 "#56bf5f", # hardwood OK
-                 "#1d4220", # conifer OK
-                 "#7db7c7", # riparian OK
-                 "#397d3f", # hardwood-conifer OK
-                 "#917e5c", # shrub
-                 "#5e513a", # savana
-                 "#fed98e", # surface
-                 "#fe9929", # mixed
-                 "#cc4c02") 
-#make chord diagram
-chord<-chorddiag(data = histFireGVchordMatrix2,
-                 type = "bipartite",
-                 groupColors = groupColors,
-                 groupnamePadding = 10,
-                 groupPadding = 3,
-                 groupnameFontsize = 14,
-                 showTicks = FALSE,
-                 margin=125,
-                 tooltipGroupConnector = "    &#x25B6;    ",
-                 chordedgeColor = "#B3B6B7"
-)
-chord
+```{r waffle, fig.height=6.5, fig.width=10}
+knitr::include_graphics("test.png") 
 ```
 
-
-### <b><font  size="4em" color="#000000">Most of the vegetation that would have had replacement fire historically has been converted to agriculture (white) or urban (pink) land uses, or have uncharacteristic vegetation (e.g., invasives or super dense forests).</font></b> 
-// Celeste: I don't love the syntax of that sentence^ I think maybe the last 'have' should be 'has'? But also just generally the phrasing is confusing. 
-/ Option: Most of the vegetation that historically had replacement fires has been converted to agriculture (white) or urban (pink) land uses, or it has uncharacteristic vegetation (e.g., invasives or super dense forests).
-/ I also just generally am not sure if this is the place for that analysis? On the other two charts/ maps the titles were in bold up in that space.
+<br>
 
 ```{r groupvegconversion map, fig.height=7, fig.width=10}
-knitr::include_graphics("groupVegConversion.jpg") 
+knitr::include_graphics("groupVeg.jpg") 
 ```
 
 
@@ -128,33 +124,9 @@ Column {.sidebar}
 -----------------------------------------------------------------------
 
 ### <b><font  size="4em" color="#000000">Fire severity varied by ecosystem type</font></b>   
-Ecosystems have varying levels of different fire types (aka severity; surface, mixed or replacement).  The map depicts historical locations of broad ecosystem groups.  
-
-Scroll down to explore how fire type varies for different ecosystem groups.  Explore and note the patterns.  For example, hover over the outer segment labeled "Replacement" then trace the bands to discover that most replacement fires occurred in the grassland ecosystems. 
-
-Continue scrolling to examine our broad vegetation groups today.  
-
-// Celeste: It would make more sense to explain fire severity types on the first page. I don't think the user-guide ("explore and note patterns") is the most helpful. Map titles ("where the ecosystems were") could be better?
-In the chord, if we're keeping it, it might be helpful to add commas into the values that you see when hovering, and maybe even round them into things like 22M, because they're hard to interpret as long strings of numbers.
-
-Recent Fire
-======================================================================
-
-<br>
-<br>
-
-```{r animated current, fig.height=6, fig.width=6, fig.align='center'}
-# add animated.gif
-knitr::include_graphics("animated.gif")
-
-```
+Ecosystems have varying levels of different fire types (aka severity; surface, mixed or replacement).  
 
 
-Column {.sidebar}
------------------------------------------------------------------------
-
-### <b><font  size="4em" color="#000000">Increasing fire</font></b>   
-It's no surprise that the amount of fires occurring today is generally increasing.  While far short of the ~172M acres that would have burned annually prior to European colonization, the amount of fire that is high-severity in ecosystems that would not had much of that fire type historically is increasing, and this number is not scaled to the current amount of natural vegetation.  
 
 
 Past vs. Present {data-width=600}
@@ -167,8 +139,6 @@ Column {.sidebar}
 
 This chart summarizes fire past (yellow dots) and present (green dots) for the lower 48 states.  
 
-/ Celeste: I think that is wrong ^?? The yellow dots, according to when you hover and also just what makes sense, should be the present. It could also use a bit more explanatory text. What are the two bold black vertical lines? 
-/ This chart is organized alphabetically. Do we want to organize from greatest to least change, or regionally, or somehow significantly otherwise?
 
 Column {data-size=900}
 ----------------------------------------------------------------

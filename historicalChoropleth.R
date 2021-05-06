@@ -69,7 +69,12 @@ tryAll <- leaflet(states_fireAll4, options = leafletOptions(zoomSnap = 0.25, zoo
                 labelOptions( 
                   style = list("font-weight" = "normal", padding = "3px 8px"), 
                   textsize = "13px", 
-                  direction = "auto"))%>%
+                  direction = "auto"))
+library(widgetframe)
+library(htmlwidgets)
+htmlwidgets::saveWidget(frameableWidget(tryAll),'choroMapSimple.html')
+
+#  if making map with all layers selectable %>%
   addPolygons(fillColor = ~palMixed(states_fireAll4$percentMixed),
               stroke=TRUE,
               weight = 1,

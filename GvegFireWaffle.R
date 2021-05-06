@@ -40,10 +40,7 @@ gvWaffle <- ggplot(GvFire, aes(fill = fire, values = acreHndThou)) +
                                "Surface (< 25%)")) + 
   coord_equal() +
   labs(
-    title = "Historical fire severity by broad vegetation groups",
-    subtitle = "One square = 100K acres",
-    caption = "Data from landfire.gov",
-    x = "Vegetation group",
+    caption = "One square = 100K acres. Data from landfire.gov",
     y = "Acres burned per year (~1300s- ~1600s)" ) +
   theme(legend.position = "bottom") +
   scale_y_continuous(labels=ks) +
