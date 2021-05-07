@@ -55,7 +55,7 @@ mytext <- paste(
 
 #################
 tryAll <- leaflet(states_fireAll4, options = leafletOptions(zoomSnap = 0.25, zoomControl = FALSE)) %>% 
-  setView( lat=35.2389948, lng=-96.3130186 , zoom=4.5) %>%
+  setView( lat=35.2389948, lng=-96.3130186 , zoom=4.0) %>%
   addProviderTiles (providers$Esri.WorldTerrain) %>%
   addPolygons(fillColor = ~palAll(states_fireAll4$percentAll),
               stroke=TRUE,
