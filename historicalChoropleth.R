@@ -55,25 +55,38 @@ mytext <- paste(
 
 #################
 tryAll <- leaflet(states_fireAll4, options = leafletOptions(zoomSnap = 0.25, zoomControl = FALSE)) %>% 
-  setView( lat=35.2389948, lng=-96.3130186 , zoom=4.0) %>%
-  addTiles() %>%
+  setView( lat=35.2389948, lng=-96.3130186 , zoom=4.5) %>%
+  addProviderTiles (providers$Esri.WorldTerrain) %>%
   addPolygons(fillColor = ~palAll(states_fireAll4$percentAll),
               stroke=TRUE,
               weight = 1,
               color = "grey",
               opacity = 5,
-              fillOpacity = .9,
+              fillOpacity = .7,
               group = "All fire types  combined (ranges from 0-25%)",
               label = mytext,
               labelOptions = 
                 labelOptions( 
                   style = list("font-weight" = "normal", padding = "3px 8px"), 
                   textsize = "13px", 
-                  direction = "auto"))
+                  direction = "auto")) %>%
+  
+ 
+ addLegend("topleft", pal = palAll, values = ~states_fireAll4$percentAll,
+            title = "Percentage of state burned annually",
+            opacity = 1,
+            group = "All")
+
+tryAll
+
+
+
 library(widgetframe)
 library(htmlwidgets)
 htmlwidgets::saveWidget(frameableWidget(tryAll),'choroMapSimple.html')
 
+
+#####################
 #  if making map with all layers selectable %>%
   addPolygons(fillColor = ~palMixed(states_fireAll4$percentMixed),
               stroke=TRUE,

@@ -11,34 +11,7 @@ self_contained: true
 
     
     ```{r global, include=FALSE}
-# load data in 'global' chunk so it can be shared by all users of the dashboard
-library(tigris)
-library(dplyr)
-library(leaflet)
-library(tidyverse)
-library(sf)
-library(rgdal)
-library(htmlwidgets)
 
-
-# load data in 'global' chunk so it can be shared by all users of the dashboard
-# Chord Diagram
-library(chorddiag)
-library(igraph)
-library(readr)
-library(tidygraph)
-
-# read in data
-histFireGVchord <- read_csv("data/histFireGVchord.csv")
-# View(histFireGVchord)
-
-#convert to matrix
-histFireGVchordMatrix<-as.matrix(as_adjacency_matrix(as_tbl_graph(histFireGVchord),attr = "acres"))
-
-#clean up matrix (could be cleaner!)
-histFireGVchordMatrix = subset(histFireGVchordMatrix, select = -c(1:7))
-
-histFireGVchordMatrix2 <- histFireGVchordMatrix[-c(8:10),]
 ```
 
 One burning issue.
@@ -79,7 +52,7 @@ Historical fire by state
 ## blah
 
 
-<font size="6"> Compare historical patterns below to where you see most fires occurring today. </font>
+<font size="6"> Historically the most fire occurred in the plains and southeast. </font>
 
 ```{r choropleth, fig.height=7}
 # insert choroMap.html URL
@@ -105,7 +78,7 @@ Fire and Ecosystems
 =========================================================
 ## blah
 
-<font size="6"> Most fire occurred in grasslands historically. </font>
+
 
 ```{r waffle, fig.height=6.5, fig.width=10}
 knitr::include_graphics("test.png") 
@@ -114,7 +87,7 @@ knitr::include_graphics("test.png")
 <br>
 
 ```{r groupvegconversion map, fig.height=7, fig.width=10}
-knitr::include_graphics("groupVeg.jpg") 
+knitr::include_graphics("groupVegLegend.png") 
 ```
 
 
@@ -126,145 +99,54 @@ Column {.sidebar}
 ### <b><font  size="4em" color="#000000">Fire severity varied by ecosystem type</font></b>   
 Ecosystems have varying levels of different fire types (aka severity; surface, mixed or replacement).  
 
+Conversion Happens
+========================================================
+## blah
+<font size="6"> Ecosystem conversion for the lower 48.  </font>
 
 
+```{r sankey, fig.height=6}
+# insert choroMap.html URL
+htmltools::tags$iframe(title = "My embedded document", src = "Snky.html", frameborder = "1", width = "100%", height="600", vspace="30")
 
-Past vs. Present {data-width=600}
-========================================================================
+```
+<br>
+
 
 Column {.sidebar}
 -----------------------------------------------------------------------
 
-### <b><font  size="4em" color="#000000">Fire by state</font></b>   
-
-This chart summarizes fire past (yellow dots) and present (green dots) for the lower 48 states.  
-
-
-Column {data-size=900}
-----------------------------------------------------------------
-
-```{r dumbbell, fig.height=9, fig.width=10}
-# horizontal lollipop chart
-
-library(tidyverse)
-library(scales)
-library(extrafont)
-library(ggplot2) 
-library(ggalt)   
-library(plotly)
+### <b><font  size="4em" color="#000000">Hover over chart to follow patterns.</font></b>   
+It's important to explore conversion as fire not only works differently from ecosystem to ecosystem, but also on developed and urban lands.  By hovering over the red Agricultural band on the right you can see that our farmlands were mostly grasslands and hardwoods historically.  Hover over the blue Grassland (past) band and you'll see what those lands are today, noting that roughly 93M acres of former grasslands are now classified as shrublands.
 
 
-currentFireAcresStates <- read_csv("data/currentFireAcresStates.csv")
-#View(currentFireAcresStates)
+Past vs. Present-a look by region
+========================================================
+## blah
+<font size="6"> A look at historical fire regimes applied to modern undeveloped lands.  </font>
 
-histAreaBurnedbyState <- read_csv("data/histAreaBurnedbyState.csv")
-#View(histAreaBurnedbyState)
-
-historicalCurrentFire <- merge(currentFireAcresStates, histAreaBurnedbyState, by = "state")
-
-historicalCurrentFire <- historicalCurrentFire %>%
-  mutate(difference = historic_acres_burned - currentAverageAcres)
-
-
-historicalCurrentFire$state <- factor(historicalCurrentFire$state , levels = rev(unique(historicalCurrentFire$state)))
-
-write.csv(historicalCurrentFire, file = "historicalVScurrentDraft.csv")
-
-
-
-# ggplot(historicalCurrentFire, aes(x=currentAverageAcres, xend=historic_acres_burned, y=state)) + 
-#   #create a thick line between x and xend instead of using defaut 
-#   #provided by geom_dubbell
-#   geom_segment(aes(x=currentAverageAcres, 
-#                    xend=historic_acres_burned, 
-#                    y=state, 
-#                    yend=state), 
-#                color="#b2b2b2", size=1.5)+
-#   geom_dumbbell(color="light blue", 
-#                 size_x=4.0, 
-#                 size_xend = 4.0,
-#                 colour_x="#edae52", 
-#                 colour_xend = "#9fb059")+
-#   labs(x=NULL, y=NULL) +
-#   theme_bw(base_size = 14, base_family = "Calisto MT") +
-#   scale_x_continuous(label=comma)
-
-##  take 2
-# add mean lines
-
-avgCur <- mean(historicalCurrentFire$currentAverageAcres)
-avgHist <- mean(historicalCurrentFire$historic_acres_burned)
-
-
-db <-
-  ggplot(historicalCurrentFire, aes(x=currentAverageAcres, xend=historic_acres_burned, y=state)) + 
-  #create a thick line between x and xend instead of using defaut 
-  #provided by geom_dubbell
-  geom_segment(aes(x=currentAverageAcres, 
-                   xend=historic_acres_burned, 
-                   y=state, 
-                   yend=state), 
-               color="#b2b2b2", size=1.5)+
-  geom_dumbbell(color="light blue", 
-                size_x=4.0, 
-                size_xend = 4.0,
-                colour_x="#edae52", 
-                colour_xend = "#9fb059")+
-  labs(x=NULL, y=NULL) +
-  theme_bw(base_size = 14, base_family = "Calisto MT") +
-  scale_x_continuous(label=comma) + 
-  geom_vline(xintercept = avgCur) +
-  geom_vline(xintercept = avgHist)
-
-
-
-
-
-
-vlineCUR <- function(x = avgCur, color = "grey") {
-  list(
-    type = "line", 
-    y0 = 0, 
-    y1 = 1, 
-    yref = "paper",
-    x0 = x, 
-    x1 = x, 
-    line = list(color = color)
-  )
-}
-
-vlineHIST <- function(x = avgHist, color = "grey") {
-  list(
-    type = "line", 
-    y0 = 0, 
-    y1 = 1, 
-    yref = "paper",
-    x0 = x, 
-    x1 = x, 
-    line = list(color = color)
-  )
-}
-
-
-
-
-
-
-
-
-fig <- plot_ly(historicalCurrentFire, color = I("gray80"))
-fig <- fig %>% add_segments(x = ~currentAverageAcres, xend = ~historic_acres_burned, y = ~state, yend = ~state, showlegend = FALSE)
-fig <- fig %>% add_markers(x = ~currentAverageAcres, y = ~state, name = "Current", color = I("#edae52"), showlegend = FALSE)
-fig <- fig %>% add_markers(x = ~historic_acres_burned, y = ~state, name = "Historical", color = I("#9fb059"), showlegend = FALSE)
-fig <- fig %>% layout(
-  xaxis = list(title = "Acres (in millions)"),
-  yaxis = list(title = "", dtick = 1),
-  margin = list(l = 65),
-  shapes = list(vlineCUR(), vlineHIST())
-)
-
-fig
+```{r korisMap, fig.height=8, fig.width=12}
+knitr::include_graphics("fireRegions.png") 
 ```
+ <br>
+ <font size="6"> Map of developed and undeveloped lands.   </font>
+<br>
+
+
+```{r developedMap, fig.height=8, fig.width=12}
+knitr::include_graphics("developed-undeveloped.jpg") 
+```
+
+Column {.sidebar}
+-----------------------------------------------------------------------
+
+### <b><font  size="4em" color="#000000">If we were to have fires at historical rates today, not including agriculture and urban lands, we'd have more than 100 M acres per year.</font></b>   
+
+* Sagebrush intermountain basins story
+* Alaska
+* What if we looked at maximum fire years?
+
+
 
 
 This is a draft
