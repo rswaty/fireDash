@@ -19,7 +19,7 @@ One burning issue.
 
 ## blah
 
-<font size="6"> Wildfire is a growing issue. </font>
+<font size="6"> This is a sandbox for playing with ways of presenting wildfire data.  Not for mass consumption. </font>
 
 
 
