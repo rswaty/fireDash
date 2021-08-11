@@ -54,6 +54,20 @@ knitr::include_graphics("groupVegLegend.png")
 knitr::include_graphics("fireGVsquare.png") 
 ```
 
+<font size="6"> A little about fire severity. </font>
+
+
+```{r mfriMap, fig.height=8, fig.width=11}
+knitr::include_graphics("histoBar.png") 
+```
+
+
+<font size="6"> In summary </font>
+
+
+```{r mfriMap, fig.height=8, fig.width=11}
+knitr::include_graphics("MFRI_QGIS.jpeg") 
+```
 
 
 
@@ -68,6 +82,30 @@ This is not news for anyone in the fire business.  What is not captured here are
 **Question:** how do you think this compares to what would have burned in the years just prior to European colonization?
 
 Data for the lower 48 United States from the Monitoring Trends in Burn Severity program (https://www.mtbs.gov/).  
+
+
+Conversion Happens
+========================================================
+## blah
+<font size="6"> Ecosystem conversion for the lower 48.  </font>
+
+
+```{r sankey, fig.height=6}
+# insert choroMap.html URL
+htmltools::tags$iframe(title = "My embedded document", src = "sankeyP2.html", frameborder = "1", width = "100%", height="700", vspace="30")
+
+```
+<br>
+
+
+Column {.sidebar}
+-----------------------------------------------------------------------
+
+### <b><font  size="4em" color="#000000">Hover over chart to follow patterns.</font></b>   
+It's important to explore conversion as fire not only works differently from ecosystem to ecosystem, but also on developed and urban lands.  By hovering over the red Agricultural band on the right you can see that our farmlands were mostly grasslands and hardwoods historically.  Hover over the blue Grassland (past) band and you'll see what those lands are today, noting that roughly 93M acres of former grasslands are now classified as shrublands.
+
+
+
 
 
 
@@ -123,26 +161,6 @@ Column {.sidebar}
 
 ### <b><font  size="4em" color="#000000">Fire severity varied by ecosystem type</font></b>   
 Ecosystems have varying levels of different fire types (aka severity; surface, mixed or replacement).  
-
-Conversion Happens
-========================================================
-## blah
-<font size="6"> Ecosystem conversion for the lower 48.  </font>
-
-
-```{r sankey, fig.height=6}
-# insert choroMap.html URL
-htmltools::tags$iframe(title = "My embedded document", src = "Snky.html", frameborder = "1", width = "100%", height="600", vspace="30")
-
-```
-<br>
-
-
-Column {.sidebar}
------------------------------------------------------------------------
-
-### <b><font  size="4em" color="#000000">Hover over chart to follow patterns.</font></b>   
-It's important to explore conversion as fire not only works differently from ecosystem to ecosystem, but also on developed and urban lands.  By hovering over the red Agricultural band on the right you can see that our farmlands were mostly grasslands and hardwoods historically.  Hover over the blue Grassland (past) band and you'll see what those lands are today, noting that roughly 93M acres of former grasslands are now classified as shrublands.
 
 
 Past vs. Present-a look by region
