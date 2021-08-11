@@ -19,16 +19,41 @@ One burning issue.
 
 ## blah
 
-<font size="6"> This is a sandbox for playing with ways of presenting wildfire data.  Not for mass consumption. </font>
+<font size="6"> Why we are here. </font>
 
 
 
 ```{r animatedPlotly, fig.height=6}
 # insert choroMap.html URL
-htmltools::tags$iframe(title = "My embedded document", src = "plotly.html", frameborder = "1", width = "100%", height="600", vspace="30")
+htmltools::tags$iframe(title = "My embedded document", src = "plotly.html", frameborder = "1", width = "90%", height="700", vspace="30")
 
 ```
 <br>
+
+<font size="6"> Before we were here-kind of.  The fall was dramatized! </font>
+
+```{r animatedPlotlyPlay, fig.height=6}
+# insert choroMap.html URL
+htmltools::tags$iframe(title = "My embedded document", src = "animatedHistCurrPlay.html", frameborder = "1", width = "90%", height="700", vspace="30")
+
+```
+<br>
+
+<font size="6"> If fire burned in squares every year-the ecosystems. </font>
+
+```{r fireSq, fig.height=7, fig.width=10}
+knitr::include_graphics("groupVegLegend.png") 
+```
+
+
+<br>
+<font size="6"> But you said... </font>
+
+
+```{r fireSqGV, fig.height=8, fig.width=11}
+knitr::include_graphics("fireGVsquare.png") 
+```
+
 
 
 
