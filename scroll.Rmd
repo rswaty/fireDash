@@ -14,7 +14,7 @@ self_contained: true
 
 ```
 
-One burning issue.
+History.
 ========================================================
 
 ## blah
@@ -39,9 +39,17 @@ htmltools::tags$iframe(title = "My embedded document", src = "animatedHistCurrPl
 ```
 <br>
 
-<font size="6"> If fire burned in squares every year-the ecosystems. </font>
+<font size="6"> If fire burned in squares every year. </font>
+
 
 ```{r fireSq, fig.height=7, fig.width=10}
+knitr::include_graphics("fireSquares.png") 
+```
+
+
+<font size="6"> "Grouped" ecosystems map-long ago. </font>
+
+```{r groupVeg, fig.height=7, fig.width=10}
 knitr::include_graphics("groupVegLegend.png") 
 ```
 
@@ -57,7 +65,7 @@ knitr::include_graphics("fireGVsquare.png")
 <font size="6"> A little about fire severity. </font>
 
 
-```{r mfriMap, fig.height=8, fig.width=11}
+```{r histoBar, fig.height=8, fig.width=11}
 knitr::include_graphics("histoBar.png") 
 ```
 
@@ -86,8 +94,13 @@ Data for the lower 48 United States from the Monitoring Trends in Burn Severity 
 
 Conversion Happens
 ========================================================
+
 ## blah
+
 <font size="6"> Ecosystem conversion for the lower 48.  </font>
+
+<br>
+<br>
 
 
 ```{r sankey, fig.height=6}
@@ -106,11 +119,49 @@ It's important to explore conversion as fire not only works differently from eco
 
 
 
+Current situation
+========================================================
+
+## blah
+
+<font size="6"> Three stories. </font>
+
+
+```{r wfhp, fig.height=8, fig.width=11}
+knitr::include_graphics("wfhp.jpg") 
+```
+
+<br>
+
+<font size="6"> WUI! Change since 1990. From Radeloff et al., 2018. </font>
+
+<br>
+
+```{r wui, fig.height=8, fig.width=11}
+knitr::include_graphics("F3.large.jpg") 
+```
+
+
+<br>
+
+<font size="6"> What's being done? 
+
+<br>
+
+See https://www.nature.org/en-us/what-we-do/our-priorities/protect-water-and-land/land-and-water-stories/why-we-work-with-fire/ for examples </font>
 
 
 
+<br>
 
-Historical fire by state
+Column {.sidebar}
+-----------------------------------------------------------------------
+
+### <b><font  size="4em" color="#000000">Fire patterns are changing.</font></b>   
+While we have millions fewer acres of fire today than we did prior to European Colonization, we have ~328,000,000 people and ~44,000,000 houses in the Wildland Urban Interface.
+
+
+Historical fire by state-OUTTAKE
 ========================================================
 ## blah
 
@@ -137,33 +188,8 @@ Prior to European colonization most of the fires were located in the central and
 * Mixed fire = 26-75% top kill
 * Replacement fire = 76-100% top kill
 
-Fire and Ecosystems
-=========================================================
-## blah
 
-
-
-```{r waffle, fig.height=6.5, fig.width=10}
-knitr::include_graphics("test.png") 
-```
-
-<br>
-
-```{r groupvegconversion map, fig.height=7, fig.width=10}
-knitr::include_graphics("groupVegLegend.png") 
-```
-
-
-
-
-Column {.sidebar}
------------------------------------------------------------------------
-
-### <b><font  size="4em" color="#000000">Fire severity varied by ecosystem type</font></b>   
-Ecosystems have varying levels of different fire types (aka severity; surface, mixed or replacement).  
-
-
-Past vs. Present-a look by region
+Past vs. Present-a look by region--DRAFT
 ========================================================
 ## blah
 <font size="6"> A look at historical fire regimes applied to modern undeveloped lands.  </font>
